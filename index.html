@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>MKV and AKR are DICTATORS</title>
+<style>
+  body {
+    background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?fit=crop&w=1600&q=80') no-repeat center center/cover;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(5px);
+    position: relative;
+    transition: background 0.5s ease;
+  }
+
+  /* h1 styles for light mode */
+  h1 {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    color: #f0f8ff; /* light text color */
+    font-family: 'Arial Black', Gadget, sans-serif;
+    font-size: 2.5em;
+    font-style: oblique;
+    padding: 20px 40px;
+    margin: 20px 0;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    text-align: center;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    transition: all 0.5s ease;
+  }
+
+  /* Glass cards for AKR and MKV */
+  .glass-card {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 15px;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    padding: 20px 40px;
+    margin: 10px auto;
+    display: inline-block;
+    text-align: center;
+    transition: all 0.5s ease;
+  }
+
+  .section-akr h2 {
+    color: #00ffea;
+    font-size: 2em;
+    font-weight: bold;
+    margin: 0;
+    text-shadow: 0 0 5px #00e5d4;
+  }
+
+  .section-mkv h2 {
+    color: #ff7b00;
+    font-size: 2em;
+    font-weight: bold;
+    margin: 0;
+    font-style: italic;
+    text-shadow: 0 0 5px #ff5500;
+  }
+
+  /* Footer styles */
+  .footer {
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+    font-family: Arial, sans-serif;
+    font-size: 0.9em;
+    line-height: 1.4;
+    border-radius: 12px;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    max-width: 220px;
+    font-weight: 600;
+    z-index: 1000;
+    text-align: right;
+    text-shadow: 0 0 7px rgba(0,0,0,0.9);
+    background: rgba(255 255 255 / 0.85);
+    color: #1a1a1a;
+    transition: all 0.5s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    white-space: normal;
+    word-break: break-word;
+  }
+
+  /* Dark mode styles */
+  body.dark {
+    background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=1600&q=80') no-repeat center center/cover;
+  }
+
+  body.dark h1 {
+    background: rgba(0, 0, 0, 0.6);
+    color: #d0f0ff;
+    text-shadow:
+      0 0 8px #66ccee,
+      0 0 12px #66ccee;
+  }
+
+  body.dark .glass-card {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(0, 255, 255, 0.3);
+    box-shadow: 0 8px 32px 0 rgba(0, 255, 255, 0.25);
+  }
+
+  body.dark .section-akr h2 {
+    color: #33fff7;
+    text-shadow: 0 0 10px #00e5d4;
+  }
+
+  body.dark .section-mkv h2 {
+    color: #ff9b40;
+    text-shadow: 0 0 10px #ff6a00;
+  }
+
+  body.dark .footer {
+    background: rgba(0 0 0 / 0.85);
+    color: #a0f0f0;
+    text-shadow:
+      0 0 10px #00ffff,
+      0 0 20px #00cccc;
+  }
+
+  /* Toggle button container */
+  .toggle-container {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    background: rgba(255 255 255 / 0.6);
+    border-radius: 25px;
+    padding: 5px 10px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.2);
+    font-family: Arial, sans-serif;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: background 0.5s ease;
+    z-index: 1100;
+  }
+
+  body.dark .toggle-container {
+    background: rgba(0 0 0 / 0.7);
+    color: #a0f0f0;
+  }
+
+  /* Styles for toggle switches */
+  .toggle-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 600;
+    font-size: 1em;
+  }
+
+  .toggle-label input[type="radio"] {
+    display: none;
+  }
+
+  .toggle-label svg {
+    width: 20px;
+    height: 20px;
+    fill: #333;
+    transition: fill 0.3s ease;
+  }
+
+  body.dark .toggle-label svg {
+    fill: #a0f0f0;
+  }
+
+  .toggle-label input[type="radio"]:checked + svg {
+    fill: #008080;
+  }
+</style>
+</head>
+<body>
+
+<h1>RUPAM BHADAS Uttar ti HAI</h1>
+
+<div class="glass-card section-akr">
+  <h2>AKR is Great</h2>
+</div>
+<div class="glass-card section-mkv">
+  <h2>MKV is Great</h2>
+</div>
+
+<div class="footer">
+  <div>Made by AKR</div>
+  <div>Idea by MKV</div>
+  <div>Improved by CHATGPT (CHADGPT)</div>
+</div>
+
+<!-- Toggle Day/Night Mode -->
+<div class="toggle-container" role="radiogroup" aria-label="Toggle theme">
+  <label class="toggle-label" for="mode-on">
+    <input type="radio" id="mode-on" name="mode" checked />
+    <!-- Sun icon -->
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <circle cx="12" cy="12" r="5" />
+      <line x1="12" y1="1" x2="12" y2="3" stroke="#333" stroke-width="2"/>
+      <line x1="12" y1="21" x2="12" y2="23" stroke="#333" stroke-width="2"/>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" stroke="#333" stroke-width="2"/>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" stroke="#333" stroke-width="2"/>
+      <line x1="1" y1="12" x2="3" y2="12" stroke="#333" stroke-width="2"/>
+      <line x1="21" y1="12" x2="23" y2="12" stroke="#333" stroke-width="2"/>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" stroke="#333" stroke-width="2"/>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" stroke="#333" stroke-width="2"/>
+    </svg>
+    On
+  </label>
+  <label class="toggle-label" for="mode-off">
+    <input type="radio" id="mode-off" name="mode" />
+    <!-- Moon icon -->
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
+    </svg>
+    Off
+  </label>
+</div>
+
+<script>
+  const body = document.body;
+  const modeOn = document.getElementById('mode-on');
+  const modeOff = document.getElementById('mode-off');
+
+  function switchMode() {
+    if (modeOff.checked) {
+      body.classList.add('dark');
+    } else {
+      body.classList.remove('dark');
+    }
+  }
+
+  modeOn.addEventListener('change', switchMode);
+  modeOff.addEventListener('change', switchMode);
+
+  // Initialize mode based on default checked radio
+  switchMode();
+</script>
+
+</body>
+</html>
